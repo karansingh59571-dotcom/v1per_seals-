@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V1PER SALE'S | New & Second-Hand Mobiles</title>
+<meta name="description" content="V1PER SALE'S - New and second-hand mobile phones.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fa;color:#111}
+header{background:#111;color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:800;letter-spacing:1px}.logo span{color:#35d06f}
+nav a{color:#fff;text-decoration:none;margin-left:18px}
+.hero{padding:55px 5%;background:linear-gradient(135deg,#111,#263238);color:white}
+.hero h1{font-size:42px;margin:0 0 12px}.hero p{max-width:650px;color:#ddd;font-size:17px}
+.btn{display:inline-block;background:#25d366;color:#fff;padding:13px 18px;border-radius:9px;text-decoration:none;font-weight:700;margin-top:10px}
+.instagram{background:#111;margin-left:8px}
+.container{width:90%;max-width:1150px;margin:30px auto}.tools{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+input{padding:13px;border:1px solid #ddd;border-radius:9px;flex:1;min-width:220px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 3px 14px #00000012}.card img{width:100%;height:220px;object-fit:contain;background:#fff}
+.cardbody{padding:15px}.price{font-size:21px;font-weight:800}.muted{color:#666;font-size:14px}.card a{display:block;text-align:center;background:#111;color:#fff;text-decoration:none;padding:11px;border-radius:8px;margin-top:12px}
+footer{margin-top:50px;background:#111;color:#aaa;text-align:center;padding:30px}
+.empty{text-align:center;padding:50px;color:#777}
+@media(max-width:600px){.hero h1{font-size:32px}nav a{margin-left:8px;font-size:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">V1PER <span>SALE'S</span></div>
+  <nav><a href="#phones">Mobiles</a><a href="#contact">Contact</a></nav>
+</header>
+
+<section class="hero">
+  <h1>V1PER SALE'S</h1>
+  <p>New & second-hand mobiles with clear photos, specifications and pricing. Check the phone details and contact us to purchase.</p>
+  <a class="btn" id="heroWhatsapp" href="#" target="_blank">WhatsApp Enquiry</a>
+  <a class="btn instagram" href="https://instagram.com/v1per_sales" target="_blank">Instagram</a>
+</section>
+
+<main class="container" id="phones">
+  <h2>Available Mobiles</h2>
+  <div class="tools">
+    <input id="search" placeholder="Search iPhone, Samsung, OnePlus...">
+  </div>
+  <div id="grid" class="grid"></div>
+</main>
+
+<section class="container" id="contact">
+  <h2>Contact V1PER SALE'S</h2>
+  <p class="muted">For price confirmation, availability, delivery/pickup and purchase, contact us on WhatsApp or Instagram.</p>
+  <a class="btn" id="contactWhatsapp" href="#" target="_blank">Chat on WhatsApp</a>
+  <a class="btn instagram" href="https://instagram.com/v1per_sales" target="_blank">Follow on Instagram</a>
+</section>
+
+<footer>© 2026 V1PER SALE'S • All rights reserved</footer>
+
+<script>
+const WHATSAPP_NUMBER = "918866633087";
+const phones = [
+  {name:"iPhone 13",price:"₹XX,XXX",condition:"Second Hand",ram:"4GB",storage:"128GB",battery:"XX%",image:"https://placehold.co/600x600?text=iPhone+13",notes:"Clean condition • Box available"},
+  {name:"Samsung Galaxy S23",price:"₹XX,XXX",condition:"Second Hand",ram:"8GB",storage:"128GB",battery:"XX%",image:"https://placehold.co/600x600?text=Galaxy+S23",notes:"Good condition • Charger available"},
+  {name:"OnePlus 12",price:"₹XX,XXX",condition:"New",ram:"12GB",storage:"256GB",battery:"100%",image:"https://placehold.co/600x600?text=OnePlus+12",notes:"New stock • Warranty available"}
+];
+const grid=document.getElementById("grid"), search=document.getElementById("search");
+function wa(text){return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text)}
+document.getElementById("heroWhatsapp").href=wa("Hello V1PER SALE'S, I want to enquire about a mobile.");
+document.getElementById("contactWhatsapp").href=wa("Hello V1PER SALE'S, I want to enquire about a mobile.");
+function render(){
+ const q=search.value.toLowerCase();
+ const list=phones.filter(p=>(p.name+" "+p.condition+" "+p.storage).toLowerCase().includes(q));
+ grid.innerHTML=list.length?list.map(p=>`
+ <article class="card"><img src="${p.image}" alt="${p.name}">
+ <div class="cardbody"><h3>${p.name}</h3><div class="price">${p.price}</div>
+ <p class="muted">${p.condition} • ${p.ram} RAM • ${p.storage}</p>
+ <p class="muted">Battery: ${p.battery}<br>${p.notes}</p>
+ <a href="${wa("Hello V1PER SALE'S, I want to buy/enquire about "+p.name+" ("+p.storage+"). Is it available?")}" target="_blank">Buy / Enquire</a>
+ </div></article>`).join(""):'<div class="empty">No mobile found.</div>';
+}
+search.addEventListener("input",render);render();
+</script>
+</body>
+</html>
